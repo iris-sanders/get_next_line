@@ -6,7 +6,8 @@
 /*   By: irsander <irsander@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/14 18:22:24 by irissanders   #+#    #+#                 */
-/*   Updated: 2023/11/14 18:22:25 by irissanders   ########   odam.nl         */
+/*   Updated: 2023/11/19 19:43:34 by irissanders   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
