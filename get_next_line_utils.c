@@ -6,8 +6,62 @@
 /*   By: irsander <irsander@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/14 18:22:24 by irissanders   #+#    #+#                 */
-/*   Updated: 2023/11/19 19:43:34 by irissanders   ########   odam.nl         */
+/*   Updated: 2023/11/19 19:52:39 by irissanders   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+int	ft_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	if (!s[i])
+		return (-1);
+	return (i);
+}
+
+void	ft_strcpy(char *line, char *buf)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = ft_strlen(line);
+	while (buf[i])
+		line[j++] = buf[i++];
+	line[j] = '\0';
+}
+
+char	*ft_strcat(char *s, char *buf)
+{
+	int				i;
+	int				j;
+	char			*temp;
+
+	i = 0;
+	j = 0;
+	temp = malloc((ft_strlen(s) + ft_strlen(buf) +1) * sizeof(char));
+	if (!temp)
+		return (NULL);
+	while (s[i])
+		temp[j++] = s[i++];
+	i = 0;
+	while (buf[i])
+		temp[j++] = buf[i++];
+	temp[j] = '\0';
+	return (temp);
+}

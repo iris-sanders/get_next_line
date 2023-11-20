@@ -6,7 +6,7 @@
 /*   By: irsander <irsander@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/14 18:22:14 by irissanders   #+#    #+#                 */
-/*   Updated: 2023/11/19 18:30:42 by irissanders   ########   odam.nl         */
+/*   Updated: 2023/11/20 10:32:58 by irissanders   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,18 @@
 
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-char *get_next_line(int fd);
+//get_next_line.c
+char 	*get_next_line(int fd);
+char	*cut_line(char *s, char *newline);
+char	*find_line(char *s);
+
+//get_next_line_utils.c
+int		ft_strlen(char *s);
+int		ft_strchr(const char *s, int c);
+char	*ft_strcat(char *s, char *buf);
+void	ft_strcpy(char *line, char *buf);
 
 #endif
