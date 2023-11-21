@@ -6,11 +6,18 @@
 /*   By: irsander <irsander@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/14 18:22:24 by irissanders   #+#    #+#                 */
-/*   Updated: 2023/11/19 19:52:39 by irissanders   ########   odam.nl         */
+/*   Updated: 2023/11/21 22:32:46 by irissanders   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	*ft_free(char **s)
+{
+	free(*s);
+	*s = NULL;
+	return (NULL);
+}
 
 int	ft_strlen(char *s)
 {
@@ -34,18 +41,6 @@ int	ft_strchr(const char *s, int c)
 	return (i);
 }
 
-void	ft_strcpy(char *line, char *buf)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = ft_strlen(line);
-	while (buf[i])
-		line[j++] = buf[i++];
-	line[j] = '\0';
-}
-
 char	*ft_strcat(char *s, char *buf)
 {
 	int				i;
@@ -56,12 +51,14 @@ char	*ft_strcat(char *s, char *buf)
 	j = 0;
 	temp = malloc((ft_strlen(s) + ft_strlen(buf) +1) * sizeof(char));
 	if (!temp)
-		return (NULL);
+		return (ft_free(&s));
 	while (s[i])
 		temp[j++] = s[i++];
 	i = 0;
 	while (buf[i])
 		temp[j++] = buf[i++];
 	temp[j] = '\0';
-	return (temp);
+	free(s);
+	s = temp;
+	return (s);
 }

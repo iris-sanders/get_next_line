@@ -6,7 +6,7 @@
 /*   By: irsander <irsander@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/14 18:21:00 by irissanders   #+#    #+#                 */
-/*   Updated: 2023/11/20 10:32:13 by irissanders   ########   odam.nl         */
+/*   Updated: 2023/11/21 21:28:17 by irissanders   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,32 @@ char	*find_line(char *s)
 	return (line);
 }
 
+char	*ft_read(char *s, int fd)
+{
+	char			buf[BUFFER_SIZE +1];
+	int				read_bytes;
+
+	while (ft_strchr(s, '\n') == -1)
+	{
+		read_bytes = read(fd, &buf[0], BUFFER_SIZE);
+		if (read_bytes == -1 || (read_bytes == 0 && *s == '\0'))
+			return (ft_free(&s));
+		if (read_bytes == 0)
+			break ;
+		buf[read_bytes] = '\0';
+		s = ft_strcat(s, buf);
+		if (!s)
+			return (ft_free(&s));
+	}
+	return (s);
+}
+
 char	*get_next_line(int fd)
 {
 	static char		*s = NULL;
-	char			buf[BUFFER_SIZE +1];
-	int				read_bytes;
 	char			*line;
-	char			*temp;
 
 	line = NULL;
-	temp = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!s)
@@ -76,37 +92,14 @@ char	*get_next_line(int fd)
 			return (NULL);
 		*s = '\0';
 	}
-	while (ft_strchr(s, '\n') == -1)
-	{
-		read_bytes = read(fd, &buf[0], BUFFER_SIZE);
-		if (read_bytes == -1 || (read_bytes == 0 && *s == '\0'))
-		{
-			free (s);
-			s = NULL;
-			return (NULL);
-		}
-		if (read_bytes == 0)
-			break ;
-		buf[read_bytes] = '\0';
-		temp = ft_strcat(s, buf);
-		free(s);
-		s = NULL;
-		if (!temp)
-			return (NULL);
-		s = temp;
-	}
+	s = ft_read(s, fd);
+	if (!s)
+		return (NULL);
 	line = find_line(s);
 	if (!line)
-	{
-		free(s);
-		s = NULL;
-		return (NULL);
-	}
+		return (ft_free(&s));
 	s = cut_line(s, line);
 	if (!s)
-	{
-		free (line);
-		return (NULL);
-	}
+		return (ft_free(&line));
 	return (line);
 }
