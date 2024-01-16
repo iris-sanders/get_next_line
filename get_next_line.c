@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   get_next_line.c                                    :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: irsander <irsander@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/11/14 18:21:00 by irissanders   #+#    #+#                 */
-/*   Updated: 2023/11/21 21:28:17 by irissanders   ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: irsander <irsander@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/14 18:21:00 by irissanders       #+#    #+#             */
+/*   Updated: 2024/01/08 14:21:07 by irsander         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ char	*find_line(char *s)
 
 char	*ft_read(char *s, int fd)
 {
-	char			buf[BUFFER_SIZE +1];
-	int				read_bytes;
+	static char			buf[BUFFER_SIZE +1];
+	int					read_bytes;
 
 	while (ft_strchr(s, '\n') == -1)
 	{
